@@ -1,6 +1,6 @@
 {
   "name": "@sibilsoren/react-vite-boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A CLI tool to create React + Vite projects with TanStack Router, SEO tooling, and Shadcn/Tailwind",
   "main": "index.js",
   "bin": {
