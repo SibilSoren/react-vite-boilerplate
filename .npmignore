@@ -1,0 +1,22 @@
+# Don't publish these files/directories to npm
+tests/
+coverage/
+jest.config.js
+.eslintrc.js
+.eslintrc.cjs
+*.log
+.env
+.env.local
+node_modules/
+.git/
+.DS_Store
+.vscode/
+.idea/
+
+# Development files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+Thumbs.db

@@ -1,0 +1,69 @@
+{
+  "name": "@sibilsoren/react-vite-boilerplate",
+  "version": "1.0.0",
+  "description": "A CLI tool to create React + Vite projects with TanStack Router, SEO tooling, and Shadcn/Tailwind",
+  "main": "index.js",
+  "bin": {
+    "react-vite-boilerplate": "./bin/cli.js",
+    "rvb": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "node bin/cli.js",
+    "build": "echo \"No build process needed for CLI\"",
+    "lint": "eslint lib/ bin/ tests/ --ext .js",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "tanstack-router",
+    "shadcn",
+    "tailwind",
+    "cli",
+    "boilerplate",
+    "scaffold"
+  ],
+  "author": {
+    "name": "Sibil Sarjam SOren",
+    "email": "sibil.sorenofficial@gmail.com",
+    "url": "https://github.com/SibilSoren"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/SibilSoren/react-vite-boilerplate#readme",
+  "bugs": {
+    "url": "https://github.com/SibilSoren/react-vite-boilerplate/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/SibilSoren"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.2.5",
+    "ora": "^5.4.1",
+    "cross-spawn": "^7.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SibilSoren/react-vite-boilerplate.git"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "templates/",
+    "README.md",
+    "CLAUDE.md"
+  ]
+}
