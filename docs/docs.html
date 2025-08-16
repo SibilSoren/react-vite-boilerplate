@@ -424,12 +424,32 @@
                     <h3 id="shadcn-ui" class="text-xl font-semibold mb-4">Shadcn/UI Components</h3>
                     <div class="bg-card p-6 rounded-lg border mb-6">
                         <ul class="space-y-2 text-sm">
-                            <li>• Pre-installed with Button and Card components</li>
+                            <li>• <strong>Pre-installed</strong> with Button and Card components ready to use</li>
+                            <li>• <strong>Automated Setup</strong> with all required dependencies included</li>
                             <li>• Built on Radix UI for accessibility</li>
                             <li>• Fully customizable with Tailwind CSS</li>
                             <li>• Easy to add more components as needed</li>
                         </ul>
                         <div class="mt-4">
+                            <h4 class="font-medium mb-2">Using Pre-installed Components:</h4>
+                            <div class="code-container relative mb-4">
+                                <div class="code-block text-xs">
+                                    import { Button } from "@/components/ui/button"<br>
+                                    import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"<br><br>
+                                    export function MyComponent() {<br>
+                                    &nbsp;&nbsp;return (<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;Card&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CardHeader&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CardTitle&gt;Welcome&lt;/CardTitle&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/CardHeader&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CardContent&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button&gt;Get Started&lt;/Button&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/CardContent&gt;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Card&gt;<br>
+                                    &nbsp;&nbsp;)<br>
+                                    }
+                                </div>
+                            </div>
                             <h4 class="font-medium mb-2">Adding More Components:</h4>
                             <div class="code-container relative">
                                 <div class="code-block">
@@ -476,13 +496,12 @@
                             ├── public/              # Static assets<br>
                             ├── src/<br>
                             │   ├── components/<br>
-                            │   │   └── ui/          # Shadcn/UI components<br>
+                            │   │   └── ui/          # Shadcn/UI components (Button, Card)<br>
                             │   │       ├── button.tsx<br>
                             │   │       └── card.tsx<br>
                             │   ├── hooks/           # Custom React hooks<br>
                             │   ├── lib/<br>
-                            │   │   ├── env.ts       # Environment variables<br>
-                            │   │   └── utils.ts     # Utility functions<br>
+                            │   │   └── utils.ts     # Utility functions with cn() helper<br>
                             │   ├── pages/           # Page components<br>
                             │   ├── routes/          # TanStack Router routes<br>
                             │   │   ├── __root.tsx<br>

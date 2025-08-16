@@ -192,8 +192,8 @@ async function createProject(projectName, options, rollback) {
     // Step 10: Setup Shadcn/UI
     const shadcnSpinner = ora('🎨 Setting up Shadcn/UI...').start();
     try {
-      await setupShadcn(targetDir, { verbose });
-      shadcnSpinner.succeed('Shadcn/UI configured');
+      await setupShadcn(targetDir, packageManager, { verbose });
+      shadcnSpinner.succeed('Shadcn/UI configured with Button and Card components');
     } catch (error) {
       shadcnSpinner.fail('Shadcn/UI setup failed');
       // This is not critical, so we just warn
@@ -259,41 +259,66 @@ async function copyTemplateFiles(targetDir, projectName, options = {}) {
   }
 }
 
-async function setupShadcn(targetDir, options = {}) {
+async function setupShadcn(targetDir, packageManager, options = {}) {
   const { verbose = false } = options;
   
-  return new Promise((resolve, reject) => {
-    const args = ['shadcn@latest', 'init', '--yes'];
-    
-    if (verbose) {
-      console.log(`🎨 Running: npx ${args.join(' ')}`);
-    }
-    
-    const child = spawn('npx', args, {
-      cwd: targetDir,
-      stdio: verbose ? 'inherit' : 'pipe'
-    });
-    
-    let stderr = '';
-    
-    if (!verbose) {
-      child.stderr?.on('data', (data) => {
-        stderr += data.toString();
-      });
-    }
-    
-    child.on('close', (code) => {
-      if (code !== 0) {
-        reject(new Error(`Shadcn setup failed with code ${code}${stderr ? ': ' + stderr : ''}`));
-      } else {
-        resolve();
+  // Function to run package manager commands
+  const runPmCommand = (command, args) => {
+    return new Promise((resolve, reject) => {
+      if (verbose) {
+        console.log(`🔧 Running: ${command} ${args.join(' ')}`);
       }
+      
+      const child = spawn(command, args, {
+        cwd: targetDir,
+        stdio: verbose ? 'inherit' : 'pipe'
+      });
+      
+      let stderr = '';
+      
+      if (!verbose) {
+        child.stderr?.on('data', (data) => {
+          stderr += data.toString();
+        });
+      }
+      
+      child.on('close', (code) => {
+        if (code !== 0) {
+          reject(new Error(`Shadcn setup failed with code ${code}${stderr ? ': ' + stderr : ''}`));
+        } else {
+          resolve();
+        }
+      });
+      
+      child.on('error', (error) => {
+        reject(error);
+      });
     });
-    
-    child.on('error', (error) => {
-      reject(error);
-    });
-  });
+  };
+
+  // Get the appropriate package manager command
+  const pmCommand = packageManager === 'npm' ? 'npx' : 
+                   packageManager === 'yarn' ? 'yarn' :
+                   packageManager === 'pnpm' ? 'pnpm' :
+                   packageManager === 'bun' ? 'bunx' : 'npx';
+
+  // Step 1: Add button component (components.json is already in template)
+  const addButtonArgs = packageManager === 'npm' ? ['shadcn@latest', 'add', 'button', '--yes'] :
+                        packageManager === 'yarn' ? ['dlx', 'shadcn@latest', 'add', 'button', '--yes'] :
+                        packageManager === 'pnpm' ? ['dlx', 'shadcn@latest', 'add', 'button', '--yes'] :
+                        packageManager === 'bun' ? ['shadcn@latest', 'add', 'button', '--yes'] : 
+                        ['shadcn@latest', 'add', 'button', '--yes'];
+
+  await runPmCommand(pmCommand, addButtonArgs);
+
+  // Step 2: Add card component
+  const addCardArgs = packageManager === 'npm' ? ['shadcn@latest', 'add', 'card', '--yes'] :
+                      packageManager === 'yarn' ? ['dlx', 'shadcn@latest', 'add', 'card', '--yes'] :
+                      packageManager === 'pnpm' ? ['dlx', 'shadcn@latest', 'add', 'card', '--yes'] :
+                      packageManager === 'bun' ? ['shadcn@latest', 'add', 'card', '--yes'] : 
+                      ['shadcn@latest', 'add', 'card', '--yes'];
+
+  await runPmCommand(pmCommand, addCardArgs);
 }
 
 async function initGitRepository(targetDir, options = {}) {

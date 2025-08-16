@@ -43,20 +43,22 @@ npm publish                # Publish to npm registry
 
 ### Key Features
 - **Robust Error Handling**: Comprehensive error types with rollback mechanism
-- **Package Manager Support**: Auto-detection of npm/yarn/pnpm/bun
+- **Package Manager Support**: Auto-detection of npm/yarn/pnpm/bun with Shadcn/UI compatibility
 - **Input Validation**: Project name validation with reserved word checking
 - **Network Checks**: Connectivity validation before package installation
 - **Template System**: File copying with variable substitution
 - **Environment Config**: Pre-configured environment variable management
+- **Shadcn/UI Integration**: Automated setup with pre-installed components and dependencies
 
 ### Template Features
 - React 18 + TypeScript + Vite
 - TanStack Router with file-based routing
-- Tailwind CSS + Shadcn/UI components
+- Tailwind CSS + Shadcn/UI components (Button, Card pre-installed)
 - React Helmet Async for SEO
 - Environment variable management
 - Git repository initialization
 - ESLint configuration
+- Complete Shadcn/UI setup with required dependencies
 
 ## Testing
 

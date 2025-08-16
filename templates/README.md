@@ -8,7 +8,7 @@ A modern React application boilerplate built with Vite, TanStack Router, Tailwin
 - ⚛️ **React 18** - Latest React with TypeScript support
 - 🗂️ **TanStack Router** - Type-safe router with powerful features
 - 🎨 **Tailwind CSS** - Utility-first CSS framework
-- 🧩 **Shadcn/UI** - Beautiful and accessible component library
+- 🧩 **Shadcn/UI** - Beautiful and accessible component library with Button and Card components
 - 🔍 **SEO Ready** - React Helmet Async for meta tags and SEO
 - 📱 **Responsive** - Mobile-first responsive design
 - 🛠️ **TypeScript** - Full TypeScript support
@@ -50,12 +50,12 @@ npm run dev
 ```
 src/
 ├── components/         # Reusable UI components
-│   └── ui/            # Shadcn/UI components
+│   └── ui/            # Shadcn/UI components (Button, Card)
 ├── hooks/             # Custom React hooks
-├── lib/               # Utility functions
+├── lib/               # Utility functions and cn() helper
 ├── pages/             # Page components
 ├── routes/            # TanStack Router routes
-├── styles/            # Global styles
+├── styles/            # Global styles with CSS variables
 └── main.tsx           # Application entry point
 ```
 
@@ -68,14 +68,36 @@ Create new route files in the `src/routes` directory. TanStack Router uses file-
 - `src/routes/blog/index.tsx` - Blog index (/blog)
 - `src/routes/blog/$postId.tsx` - Dynamic blog post (/blog/:postId)
 
-## Adding Shadcn/UI Components
+## Using Shadcn/UI Components
 
-Add new Shadcn/UI components using the CLI:
+This project comes with Button and Card components pre-installed. Use them in your components:
+
+```tsx
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+export function MyComponent() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button>Get Started</Button>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+### Adding More Components
+
+Add additional Shadcn/UI components using the CLI:
 
 ```bash
-npx shadcn@latest add button
-npx shadcn@latest add card
 npx shadcn@latest add dialog
+npx shadcn@latest add input
+npx shadcn@latest add toast
 ```
 
 ## Customization

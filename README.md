@@ -9,7 +9,7 @@ A production-ready CLI tool for creating React + Vite projects with TanStack Rou
 - Vite for lightning-fast development
 - TanStack Router for type-safe routing
 - Tailwind CSS for utility-first styling
-- Shadcn/UI for beautiful components
+- Shadcn/UI with pre-configured Button and Card components
 - React Helmet Async for SEO
 
 🛠️ **Developer Experience**
@@ -98,16 +98,15 @@ my-project/
 ├── public/
 ├── src/
 │   ├── components/
-│   │   └── ui/              # Shadcn/UI components
+│   │   └── ui/              # Shadcn/UI components (Button, Card)
 │   ├── lib/
-│   │   ├── env.ts           # Environment configuration
-│   │   └── utils.ts         # Utility functions
+│   │   └── utils.ts         # Utility functions with cn() helper
 │   ├── routes/
 │   │   ├── __root.tsx       # Root layout
-│   │   ├── index.tsx        # Home page
+│   │   ├── index.tsx        # Home page with demo components
 │   │   └── about.tsx        # About page
 │   ├── styles/
-│   │   └── globals.css      # Global styles
+│   │   └── globals.css      # Global styles with CSS variables
 │   └── main.tsx             # Application entry
 ├── .env.example             # Environment variables template
 ├── .env.local               # Local environment variables
@@ -117,6 +116,46 @@ my-project/
 ├── tailwind.config.js       # Tailwind CSS configuration
 ├── tsconfig.json            # TypeScript configuration
 └── vite.config.ts           # Vite configuration
+```
+
+## Shadcn/UI Integration
+
+The CLI automatically sets up Shadcn/UI with:
+
+- **Pre-installed Components**: Button and Card components ready to use
+- **Required Dependencies**: All necessary packages including `class-variance-authority`, `clsx`, `lucide-react`, `tailwind-merge`, `tailwindcss-animate`
+- **Proper Configuration**: `components.json` configured for optimal compatibility
+- **CSS Variables**: Tailwind CSS setup with CSS variables for theming
+
+### Adding More Components
+
+After project creation, you can add more Shadcn/UI components:
+
+```bash
+cd my-project
+npx shadcn@latest add dialog
+npx shadcn@latest add input
+npx shadcn@latest add toast
+```
+
+### Using the Pre-installed Components
+
+```tsx
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+export function MyComponent() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button>Get Started</Button>
+      </CardContent>
+    </Card>
+  )
+}
 ```
 
 ## Environment Variables
