@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - React Vite Boilerplate</title>
+    <meta name="description" content="Complete documentation for React Vite Boilerplate CLI tool including getting started guide, CLI reference, features, and troubleshooting.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                        primary: {
+                            DEFAULT: "hsl(var(--primary))",
+                            foreground: "hsl(var(--primary-foreground))",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(var(--secondary))",
+                            foreground: "hsl(var(--secondary-foreground))",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(var(--muted))",
+                            foreground: "hsl(var(--muted-foreground))",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(var(--accent))",
+                            foreground: "hsl(var(--accent-foreground))",
+                        },
+                        card: {
+                            DEFAULT: "hsl(var(--card))",
+                            foreground: "hsl(var(--card-foreground))",
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --primary: 222.2 47.4% 11.2%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96%;
+            --secondary-foreground: 222.2 84% 4.9%;
+            --muted: 210 40% 96%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96%;
+            --accent-foreground: 222.2 84% 4.9%;
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 222.2 84% 4.9%;
+        }
+        
+        .dark {
+            --background: 222.2 84% 4.9%;
+            --foreground: 210 40% 98%;
+            --card: 222.2 84% 4.9%;
+            --card-foreground: 210 40% 98%;
+            --primary: 210 40% 98%;
+            --primary-foreground: 222.2 47.4% 11.2%;
+            --secondary: 217.2 32.6% 17.5%;
+            --secondary-foreground: 210 40% 98%;
+            --muted: 217.2 32.6% 17.5%;
+            --muted-foreground: 215 20.2% 65.1%;
+            --accent: 217.2 32.6% 17.5%;
+            --accent-foreground: 210 40% 98%;
+            --border: 217.2 32.6% 17.5%;
+            --input: 217.2 32.6% 17.5%;
+            --ring: 212.7 26.8% 83.9%;
+        }
+        
+        * {
+            border-color: hsl(var(--border));
+        }
+        
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .sidebar {
+            height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+        
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: hsl(var(--muted-foreground));
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            scroll-margin-top: 5rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="./index.html" class="text-xl font-bold gradient-text">React Vite Boilerplate</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="./index.html" class="text-sm font-medium hover:text-primary transition-colors">Home</a>
+                    <a href="#getting-started" class="text-sm font-medium hover:text-primary transition-colors">Docs</a>
+                    <a href="https://github.com/SibilSoren/react-vite-boilerplate" target="_blank" class="text-sm font-medium hover:text-primary transition-colors">GitHub</a>
+                    <button id="theme-toggle" class="p-2 rounded-md hover:bg-accent transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-muted/50 border-r sidebar fixed left-0 top-16 hidden lg:block">
+            <div class="p-6">
+                <nav class="space-y-1">
+                    <a href="#getting-started" class="sidebar-link">Getting Started</a>
+                    <a href="#installation" class="sidebar-link ml-4">Installation</a>
+                    <a href="#quick-start" class="sidebar-link ml-4">Quick Start</a>
+                    
+                    <a href="#cli-reference" class="sidebar-link">CLI Reference</a>
+                    <a href="#basic-usage" class="sidebar-link ml-4">Basic Usage</a>
+                    <a href="#options" class="sidebar-link ml-4">Options</a>
+                    <a href="#examples" class="sidebar-link ml-4">Examples</a>
+                    
+                    <a href="#features" class="sidebar-link">Features</a>
+                    <a href="#react-typescript" class="sidebar-link ml-4">React + TypeScript</a>
+                    <a href="#vite" class="sidebar-link ml-4">Vite</a>
+                    <a href="#tanstack-router" class="sidebar-link ml-4">TanStack Router</a>
+                    <a href="#shadcn-ui" class="sidebar-link ml-4">Shadcn/UI</a>
+                    <a href="#tailwind" class="sidebar-link ml-4">Tailwind CSS</a>
+                    <a href="#seo" class="sidebar-link ml-4">SEO Setup</a>
+                    
+                    <a href="#template-structure" class="sidebar-link">Template Structure</a>
+                    <a href="#project-structure" class="sidebar-link ml-4">Project Structure</a>
+                    <a href="#configuration-files" class="sidebar-link ml-4">Configuration Files</a>
+                    
+                    <a href="#configuration" class="sidebar-link">Configuration</a>
+                    <a href="#package-managers" class="sidebar-link ml-4">Package Managers</a>
+                    <a href="#customization" class="sidebar-link ml-4">Customization</a>
+                    
+                    <a href="#troubleshooting" class="sidebar-link">Troubleshooting</a>
+                    <a href="#common-issues" class="sidebar-link ml-4">Common Issues</a>
+                    <a href="#error-codes" class="sidebar-link ml-4">Error Codes</a>
+                    
+                    <a href="#contributing" class="sidebar-link">Contributing</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 lg:ml-64">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                
+                <!-- Getting Started -->
+                <section id="getting-started" class="mb-16">
+                    <h1 class="text-4xl font-bold mb-6">Documentation</h1>
+                    <p class="text-xl text-muted-foreground mb-8">
+                        Complete guide to using React Vite Boilerplate CLI tool for creating modern React applications.
+                    </p>
+
+                    <h2 id="installation" class="text-2xl font-semibold mb-4">Installation</h2>
+                    <p class="text-muted-foreground mb-4">
+                        React Vite Boilerplate is available as an npm package. You can use it directly with npx or install it globally.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <h3 class="text-lg font-medium mb-2">Using npx (Recommended)</h3>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npx @sibilsoren/react-vite-boilerplate my-app
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx @sibilsoren/react-vite-boilerplate my-app">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-2">Global Installation</h3>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npm install -g @sibilsoren/react-vite-boilerplate<br>
+                                    react-vite-boilerplate my-app
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npm install -g @sibilsoren/react-vite-boilerplate">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="quick-start" class="text-2xl font-semibold mb-4">Quick Start</h2>
+                    <p class="text-muted-foreground mb-4">
+                        Get up and running with a new React project in seconds:
+                    </p>
+
+                    <div class="code-container relative mb-6">
+                        <div class="code-block">
+                            # Create a new project<br>
+                            npx @sibilsoren/react-vite-boilerplate my-app<br><br>
+                            # Navigate to the project directory<br>
+                            cd my-app<br><br>
+                            # Start the development server<br>
+                            npm run dev
+                        </div>
+                        <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx @sibilsoren/react-vite-boilerplate my-app && cd my-app && npm run dev">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-card p-4 rounded-lg border">
+                        <h4 class="font-medium mb-2">🎉 That's it!</h4>
+                        <p class="text-sm text-muted-foreground">
+                            Your React application will be running at <code class="px-1 py-0.5 bg-muted rounded text-xs">http://localhost:5173</code> 
+                            with hot module replacement, TypeScript support, and all the modern tooling you need.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- CLI Reference -->
+                <section id="cli-reference" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">CLI Reference</h2>
+
+                    <h3 id="basic-usage" class="text-xl font-semibold mb-4">Basic Usage</h3>
+                    <div class="code-container relative mb-6">
+                        <div class="code-block">
+                            react-vite-boilerplate [options] &lt;project-name&gt;
+                        </div>
+                    </div>
+
+                    <h3 id="options" class="text-xl font-semibold mb-4">Options</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">-y, --yes</h4>
+                            <p class="text-sm text-muted-foreground">Skip interactive prompts and use defaults</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--pm &lt;manager&gt;</h4>
+                            <p class="text-sm text-muted-foreground">Specify package manager (npm, yarn, pnpm, bun)</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--skip-install</h4>
+                            <p class="text-sm text-muted-foreground">Skip package installation</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--skip-git</h4>
+                            <p class="text-sm text-muted-foreground">Skip git repository initialization</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--verbose</h4>
+                            <p class="text-sm text-muted-foreground">Enable verbose output</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--dry-run</h4>
+                            <p class="text-sm text-muted-foreground">Show what would be created without actually creating it</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">--template &lt;name&gt;</h4>
+                            <p class="text-sm text-muted-foreground">Use a specific template variant</p>
+                        </div>
+                    </div>
+
+                    <h3 id="examples" class="text-xl font-semibold mb-4">Examples</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium mb-2">Create project with yarn</h4>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npx @sibilsoren/react-vite-boilerplate my-app --pm yarn
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx @sibilsoren/react-vite-boilerplate my-app --pm yarn">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2">Skip installation and git init</h4>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npx @sibilsoren/react-vite-boilerplate my-app --skip-install --skip-git
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx @sibilsoren/react-vite-boilerplate my-app --skip-install --skip-git">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2">Preview without creating</h4>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npx @sibilsoren/react-vite-boilerplate my-app --dry-run
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx @sibilsoren/react-vite-boilerplate my-app --dry-run">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Features -->
+                <section id="features" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">Features</h2>
+                    <p class="text-muted-foreground mb-8">
+                        React Vite Boilerplate comes pre-configured with modern tools and best practices for React development.
+                    </p>
+
+                    <h3 id="react-typescript" class="text-xl font-semibold mb-4">React 18 + TypeScript</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• Latest React 18 with concurrent features</li>
+                            <li>• Full TypeScript support with strict mode enabled</li>
+                            <li>• React DOM with modern rendering</li>
+                            <li>• Pre-configured TypeScript compiler options</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="vite" class="text-xl font-semibold mb-4">Vite Development</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• Lightning-fast development server with HMR</li>
+                            <li>• Optimized production builds with code splitting</li>
+                            <li>• Native ES modules support</li>
+                            <li>• Built-in TypeScript support</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="tanstack-router" class="text-xl font-semibold mb-4">TanStack Router</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• Type-safe file-based routing</li>
+                            <li>• Automatic code splitting by route</li>
+                            <li>• Built-in data loading and caching</li>
+                            <li>• Search params and state management</li>
+                        </ul>
+                        <div class="mt-4">
+                            <h4 class="font-medium mb-2">Example Route Structure:</h4>
+                            <div class="code-container relative">
+                                <div class="code-block text-xs">
+                                    src/routes/<br>
+                                    ├── __root.tsx      # Root layout<br>
+                                    ├── index.tsx       # Home page (/)<br>
+                                    └── about.tsx       # About page (/about)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 id="shadcn-ui" class="text-xl font-semibold mb-4">Shadcn/UI Components</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• Pre-installed with Button and Card components</li>
+                            <li>• Built on Radix UI for accessibility</li>
+                            <li>• Fully customizable with Tailwind CSS</li>
+                            <li>• Easy to add more components as needed</li>
+                        </ul>
+                        <div class="mt-4">
+                            <h4 class="font-medium mb-2">Adding More Components:</h4>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    npx shadcn@latest add dialog
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="npx shadcn@latest add dialog">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 id="tailwind" class="text-xl font-semibold mb-4">Tailwind CSS</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• Utility-first CSS framework</li>
+                            <li>• Configured with custom design tokens</li>
+                            <li>• PostCSS integration for processing</li>
+                            <li>• Responsive design utilities</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="seo" class="text-xl font-semibold mb-4">SEO Setup</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <ul class="space-y-2 text-sm">
+                            <li>• React Helmet Async for dynamic meta tags</li>
+                            <li>• Pre-configured HTML meta structure</li>
+                            <li>• Environment variable management</li>
+                            <li>• SEO-friendly routing setup</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Template Structure -->
+                <section id="template-structure" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">Template Structure</h2>
+
+                    <h3 id="project-structure" class="text-xl font-semibold mb-4">Project Structure</h3>
+                    <div class="code-container relative mb-6">
+                        <div class="code-block text-sm">
+                            my-app/<br>
+                            ├── public/              # Static assets<br>
+                            ├── src/<br>
+                            │   ├── components/<br>
+                            │   │   └── ui/          # Shadcn/UI components<br>
+                            │   │       ├── button.tsx<br>
+                            │   │       └── card.tsx<br>
+                            │   ├── hooks/           # Custom React hooks<br>
+                            │   ├── lib/<br>
+                            │   │   ├── env.ts       # Environment variables<br>
+                            │   │   └── utils.ts     # Utility functions<br>
+                            │   ├── pages/           # Page components<br>
+                            │   ├── routes/          # TanStack Router routes<br>
+                            │   │   ├── __root.tsx<br>
+                            │   │   ├── index.tsx<br>
+                            │   │   └── about.tsx<br>
+                            │   ├── styles/<br>
+                            │   │   └── globals.css  # Global styles<br>
+                            │   ├── utils/           # General utilities<br>
+                            │   └── main.tsx         # App entry point<br>
+                            ├── components.json      # Shadcn/UI config<br>
+                            ├── index.html           # HTML template<br>
+                            ├── package.json         # Dependencies<br>
+                            ├── postcss.config.js    # PostCSS config<br>
+                            ├── tailwind.config.js   # Tailwind config<br>
+                            ├── tsconfig.json        # TypeScript config<br>
+                            ├── tsconfig.node.json   # Node TypeScript config<br>
+                            └── vite.config.ts       # Vite configuration
+                        </div>
+                    </div>
+
+                    <h3 id="configuration-files" class="text-xl font-semibold mb-4">Key Configuration Files</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">vite.config.ts</h4>
+                            <p class="text-sm text-muted-foreground mb-3">Vite configuration with TanStack Router plugin</p>
+                            <div class="code-container relative">
+                                <div class="code-block text-xs">
+                                    import { defineConfig } from 'vite'<br>
+                                    import react from '@vitejs/plugin-react'<br>
+                                    import { TanStackRouterVite } from '@tanstack/router-vite-plugin'<br><br>
+                                    export default defineConfig({<br>
+                                    &nbsp;&nbsp;plugins: [react(), TanStackRouterVite()],<br>
+                                    })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">tailwind.config.js</h4>
+                            <p class="text-sm text-muted-foreground mb-3">Tailwind CSS configuration with design tokens</p>
+                            <div class="code-container relative">
+                                <div class="code-block text-xs">
+                                    module.exports = {<br>
+                                    &nbsp;&nbsp;content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],<br>
+                                    &nbsp;&nbsp;theme: {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;extend: {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Custom color system<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;}<br>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Configuration -->
+                <section id="configuration" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">Configuration</h2>
+
+                    <h3 id="package-managers" class="text-xl font-semibold mb-4">Package Managers</h3>
+                    <div class="bg-card p-6 rounded-lg border mb-6">
+                        <p class="text-sm text-muted-foreground mb-4">
+                            React Vite Boilerplate supports multiple package managers with automatic detection:
+                        </p>
+                        <ul class="space-y-2 text-sm">
+                            <li>• <strong>npm</strong> - Default Node.js package manager</li>
+                            <li>• <strong>yarn</strong> - Fast, reliable, and secure dependency management</li>
+                            <li>• <strong>pnpm</strong> - Fast, disk space efficient package manager</li>
+                            <li>• <strong>bun</strong> - Ultra-fast JavaScript runtime and package manager</li>
+                        </ul>
+                        <div class="mt-4">
+                            <p class="text-sm text-muted-foreground">
+                                The CLI automatically detects your preferred package manager based on existing lock files or falls back to npm.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 id="customization" class="text-xl font-semibold mb-4">Customization</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium mb-2">Environment Variables</h4>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                The template includes environment variable setup with TypeScript support:
+                            </p>
+                            <div class="code-container relative">
+                                <div class="code-block text-xs">
+                                    # .env<br>
+                                    VITE_APP_TITLE=My React App<br>
+                                    VITE_API_BASE_URL=https://api.example.com
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium mb-2">Adding Dependencies</h4>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                Add new dependencies using your preferred package manager:
+                            </p>
+                            <div class="code-container relative">
+                                <div class="code-block text-xs">
+                                    # With npm<br>
+                                    npm install lodash<br>
+                                    npm install -D @types/lodash<br><br>
+                                    # With yarn<br>
+                                    yarn add lodash<br>
+                                    yarn add -D @types/lodash
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting -->
+                <section id="troubleshooting" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">Troubleshooting</h2>
+
+                    <h3 id="common-issues" class="text-xl font-semibold mb-4">Common Issues</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium mb-2">Package installation fails</h4>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                If package installation fails, try the following:
+                            </p>
+                            <ul class="text-sm space-y-1">
+                                <li>• Check your internet connection</li>
+                                <li>• Clear npm cache: <code class="px-1 py-0.5 bg-muted rounded text-xs">npm cache clean --force</code></li>
+                                <li>• Try a different package manager: <code class="px-1 py-0.5 bg-muted rounded text-xs">--pm yarn</code></li>
+                                <li>• Use <code class="px-1 py-0.5 bg-muted rounded text-xs">--skip-install</code> and install manually</li>
+                            </ul>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium mb-2">TypeScript errors</h4>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                If you encounter TypeScript errors:
+                            </p>
+                            <ul class="text-sm space-y-1">
+                                <li>• Ensure all dependencies are installed</li>
+                                <li>• Restart your TypeScript server in VS Code</li>
+                                <li>• Check for missing type definitions</li>
+                                <li>• Verify your tsconfig.json configuration</li>
+                            </ul>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium mb-2">Git initialization fails</h4>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                If git initialization fails:
+                            </p>
+                            <ul class="text-sm space-y-1">
+                                <li>• Ensure git is installed and configured</li>
+                                <li>• Set git user.name and user.email</li>
+                                <li>• Use <code class="px-1 py-0.5 bg-muted rounded text-xs">--skip-git</code> to skip git initialization</li>
+                                <li>• Initialize git manually after project creation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 id="error-codes" class="text-xl font-semibold mb-4">Error Codes</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">VALIDATION</h4>
+                            <p class="text-sm text-muted-foreground">Project name or directory validation failed</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">FILESYSTEM</h4>
+                            <p class="text-sm text-muted-foreground">File system operation failed</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">PACKAGE_MANAGER</h4>
+                            <p class="text-sm text-muted-foreground">Package manager operation failed</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">TEMPLATE</h4>
+                            <p class="text-sm text-muted-foreground">Template copying or processing failed</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-mono text-sm font-medium mb-2">NETWORK</h4>
+                            <p class="text-sm text-muted-foreground">Network connectivity issue</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contributing -->
+                <section id="contributing" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6">Contributing</h2>
+                    <p class="text-muted-foreground mb-6">
+                        We welcome contributions to React Vite Boilerplate! Here's how you can help improve the project.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">Development Setup</h3>
+                            <div class="code-container relative">
+                                <div class="code-block">
+                                    # Clone the repository<br>
+                                    git clone https://github.com/SibilSoren/react-vite-boilerplate.git<br><br>
+                                    # Install dependencies<br>
+                                    npm install<br><br>
+                                    # Run tests<br>
+                                    npm test<br><br>
+                                    # Test the CLI locally<br>
+                                    node bin/cli.js test-project --verbose
+                                </div>
+                                <button class="copy-btn p-2 bg-card hover:bg-accent rounded transition-colors" data-copy="git clone https://github.com/SibilSoren/react-vite-boilerplate.git && cd react-vite-boilerplate && npm install">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">How to Contribute</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Fork the repository and create a feature branch</li>
+                                <li>• Make your changes and add tests if applicable</li>
+                                <li>• Ensure all tests pass: <code class="px-1 py-0.5 bg-muted rounded text-xs">npm test</code></li>
+                                <li>• Run linting: <code class="px-1 py-0.5 bg-muted rounded text-xs">npm run lint</code></li>
+                                <li>• Submit a pull request with a clear description</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">Areas for Contribution</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Adding new template variants</li>
+                                <li>• Improving error handling and messages</li>
+                                <li>• Adding more CLI options and features</li>
+                                <li>• Enhancing documentation and examples</li>
+                                <li>• Bug fixes and performance improvements</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-card p-4 rounded-lg border">
+                            <h4 class="font-medium mb-2">💡 Have Ideas?</h4>
+                            <p class="text-sm text-muted-foreground">
+                                Open an issue on GitHub to discuss new features or improvements. 
+                                We'd love to hear your suggestions!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        
+        // Copy to clipboard functionality
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const textToCopy = button.getAttribute('data-copy');
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    button.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                    setTimeout(() => {
+                        button.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                }
+            });
+        });
+        
+        // Sidebar active link tracking
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('section[id], h2[id], h3[id]');
+        
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

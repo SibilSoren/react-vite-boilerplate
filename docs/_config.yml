@@ -1,0 +1,39 @@
+# GitHub Pages configuration
+title: React Vite Boilerplate
+description: A production-ready CLI tool to create React + Vite projects with TanStack Router, SEO tooling, and Shadcn/Tailwind
+baseurl: /react-vite-boilerplate
+url: https://sibilsoren.github.io
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+
+# SEO settings
+author:
+  name: Sibil Sarjam Soren
+  email: sibil.sorenofficial@gmail.com
+  twitter: SibilSoren
+
+social:
+  - https://github.com/SibilSoren
+  - https://twitter.com/SibilSoren
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
